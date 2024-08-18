@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>余额和进度</title>
+    <title>进度</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -53,22 +53,19 @@
     </style>
   </head>
   <body>
-    <h1>余额和进度</h1>
+    <h1>Balancer</h1>
     <div class="container">
       <div class="item">
         <p id="date">日期：加载中...</p>
       </div>
       <div class="item">
-        <p id="balance">余额：加载中...</p>
-      </div>
-      <div class="item">
-        <p>剩余天数</p>
+        <p>剩余天数 (<span id="remaining-days">加载中...</span>天)</p>
         <div class="progress-bar-container">
           <div class="progress-bar" id="days-progress"></div>
         </div>
       </div>
       <div class="item">
-        <p>剩余金额</p>
+        <p>剩余金额 (<span id="remaining-amount">加载中...</span>元)</p>
         <div class="progress-bar-container">
           <div class="progress-bar" id="amount-progress"></div>
         </div>
@@ -106,10 +103,6 @@
           .padStart(2, "0")}`;
         document.getElementById("date").textContent = `日期：${currentDate}`;
 
-        // 更新余额
-        document.getElementById("balance").textContent =
-          `余额：￥${data.balance}`;
-
         // 计算本月剩余天数
         const totalDays = new Date(year, month, 0).getDate();
         const remainingDays = totalDays - day;
@@ -117,12 +110,14 @@
         document.getElementById("days-progress").style.width =
           `${daysProgress}%`;
         document.getElementById("days-progress").textContent = `${daysProgress.toFixed(2)}%`;
+        document.getElementById("remaining-days").textContent = remainingDays;
 
         // 更新剩余金额进度条
         const amountProgress = (data.balance / totalAmount) * 100;
         document.getElementById("amount-progress").style.width =
           `${amountProgress}%`;
         document.getElementById("amount-progress").textContent = `${amountProgress.toFixed(2)}%`;
+        document.getElementById("remaining-amount").textContent = data.balance;
       }
 
       // 初次调用
