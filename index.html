@@ -4,9 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fetch JSON Data</title>
+    <style>
+      .progress-container {
+        margin: 20px 0;
+      }
+      .progress-bar {
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 25px;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 20px;
+        background-color: #4caf50;
+        width: 0;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <h1>Balance: <span id="balance">Loading...</span></h1>
+    <div class="progress-container">
+      <p>Days Remaining in the Month:</p>
+      <div class="progress-bar">
+        <div id="days-progress" class="progress-bar-fill"></div>
+      </div>
+    </div>
+    <div class="progress-container">
+      <p>Current Balance:</p>
+      <div class="progress-bar">
+        <div id="balance-progress" class="progress-bar-fill"></div>
+      </div>
+    </div>
 
     <script>
       const fetchData = async () => {
@@ -19,17 +50,52 @@
           }
           const data = await response.json();
           document.getElementById("balance").innerText = data.balance;
+
+          const currentBalance = data.balance;
+          const maxBalance = 1000; // 假设最大余额是1000
+          const balancePercentage = (currentBalance / maxBalance) * 100;
+          document.getElementById("balance-progress").style.width =
+            balancePercentage + "%";
+          document.getElementById("balance-progress").innerText =
+            balancePercentage.toFixed(1) + "%";
         } catch (error) {
           console.error(
             "There has been a problem with your fetch operation:",
             error
           );
           document.getElementById("balance").innerText = "Error loading data";
+          document.getElementById("balance-progress").style.width = "0";
+          document.getElementById("balance-progress").innerText = "0%";
         }
       };
 
+      const updateDaysRemaining = () => {
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        const currentMonth = today.getMonth() + 1;
+        const daysInCurrentMonth = new Date(
+          currentYear,
+          currentMonth,
+          0
+        ).getDate();
+        const currentDay = today.getDate();
+        const daysRemaining = daysInCurrentMonth - currentDay;
+        const remainingDaysPercentage =
+          (daysRemaining / daysInCurrentMonth) * 100;
+        document.getElementById("days-progress").style.width =
+          remainingDaysPercentage + "%";
+        document.getElementById("days-progress").innerText =
+          daysRemaining + " days (" + remainingDaysPercentage.toFixed(1) + "%)";
+      };
+
+      // Update days remaining on page load
+      updateDaysRemaining();
+
       // Fetch data every 10 seconds (10000 milliseconds)
       setInterval(fetchData, 10000);
+
+      // Update days remaining every day
+      setInterval(updateDaysRemaining, 86400000); // 24 hours in milliseconds
 
       // Initial fetch
       fetchData();
