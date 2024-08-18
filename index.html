@@ -1,37 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic JSON Data</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Balance Information</h1>
     <p id="balance">Loading...</p>
     <p id="updated-at">Loading...</p>
 
     <script>
-        async function fetchData() {
-            try {
-                const response = await fetch('https://your-username.github.io/your-repo/data.json');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                const data = await response.json();
-                document.getElementById('balance').innerText = `Balance: ${data.balance}`;
-                document.getElementById('updated-at').innerText = `Updated at: ${data.updated_at}`;
-            } catch (error) {
-                console.error('There has been a problem with your fetch operation:', error);
-                document.getElementById('balance').innerText = 'Error loading data';
-                document.getElementById('updated-at').innerText = 'Error loading data';
-            }
+      async function fetchData() {
+        try {
+          const response = await fetch(
+            "https://your-username.github.io/your-repo/data.json"
+          );
+          if (!response.ok) {
+            throw new Error(
+              "Network response was not ok " + response.statusText
+            );
+          }
+          const data = await response.json();
+          document.getElementById("balance").innerText =
+            `Balance: ${data.balance}`;
+          document.getElementById("updated-at").innerText =
+            `Updated at: ${data.updated_at}`;
+        } catch (error) {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+          document.getElementById("balance").innerText = "Error loading data";
+          document.getElementById("updated-at").innerText =
+            "Error loading data";
         }
+      }
 
-        // Fetch data every 60 seconds
-        setInterval(fetchData, 60000);
+      // Fetch data every 60 seconds
+      setInterval(fetchData, 60000);
 
-        // Initial fetch
-        fetchData();
+      // Initial fetch
+      fetchData();
     </script>
-</body>
+  </body>
 </html>
