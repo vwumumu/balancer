@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>163 Emails</title>
+  </head>
+  <body>
+    <h1>Latest Emails</h1>
+    <div id="emails"></div>
+    <script>
+      async function fetchEmails() {
+        const response = await fetch(
+          "https://gb-aheuhoazzc.cn-hangzhou.fcapp.run"
+        );
+        const data = await response.json();
+        console.log(data);
+        const emailsDiv = document.getElementById("emails");
+        data.emails.forEach((email) => {
+          const emailDiv = document.createElement("div");
+          emailDiv.innerHTML = `
+                    <h3>${email.subject}</h3>
+                    <p>From: ${email.from}</p>
+                    <p>${email.body}</p>
+                `;
+          emailsDiv.appendChild(emailDiv);
+        });
+      }
+
+      fetchEmails();
+    </script>
+  </body>
+</html>
