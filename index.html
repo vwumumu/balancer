@@ -67,7 +67,7 @@
   <div class="container">
     <div class="item-row">
       <div class="item">
-        <p id="date">日期：加载中...</p>
+        <p id="date">更新时间：加载中...</p>
       </div>
       <div class="item">
         <p>今日余额：<span id="today-balance">加载中...</span>元</p>
@@ -86,7 +86,6 @@
       </div>
     </div>
   </div>
-  <footer>每5分钟更新一次</footer>
 
   <script>
     async function fetchData() {
@@ -114,7 +113,7 @@
 
       // 更新日期
       const currentDate = data.updated_at
-      document.getElementById("date").textContent = `日期：${currentDate}`;
+      document.getElementById("date").textContent = `更新时间：${currentDate}`;
 
       // 显示今日余额
       document.getElementById("today-balance").textContent = data.balance;
