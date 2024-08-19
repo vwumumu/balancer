@@ -32,6 +32,14 @@
         margin-bottom: 20px;
       }
 
+      .item-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
       .progress-bar-container {
         background: #e0e0e0;
         border-radius: 20px;
@@ -55,12 +63,13 @@
   <body>
     <h1>Balancer</h1>
     <div class="container">
-      <div class="item">
-        <p id="date">日期：加载中...</p>
-      </div>
-      <!-- 新增今日余额显示 -->
-      <div class="item">
-        <p>今日余额：<span id="today-balance">加载中...</span>元</p>
+      <div class="item-row">
+        <div class="item">
+          <p id="date">日期：加载中...</p>
+        </div>
+        <div class="item">
+          <p>今日余额：<span id="today-balance">加载中...</span>元</p>
+        </div>
       </div>
       <div class="item">
         <p>剩余天数 (<span id="remaining-days">加载中...</span>天)</p>
