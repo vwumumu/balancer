@@ -117,7 +117,7 @@
         document.getElementById("amount-progress").style.width =
           `${amountProgress}%`;
         document.getElementById("amount-progress").textContent = `${amountProgress.toFixed(2)}%`;
-        document.getElementById("remaining-amount").textContent = data.balance;
+        document.getElementById("remaining-amount").textContent = data.balance + remainingDays * 450;
       }
 
       // 初次调用
