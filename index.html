@@ -128,7 +128,7 @@
       document.getElementById("remaining-days").textContent = remainingDays;
 
       // 更新剩余金额进度条
-      const balance = data.balance + remainingDays * 450
+      const balance = data.balance + (remainingDays - 1) * 450
       const amountProgress = (balance / totalAmount) * 100;
       document.getElementById("amount-progress").style.width =
         `${amountProgress}%`;
