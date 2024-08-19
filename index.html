@@ -32,6 +32,13 @@
         margin-bottom: 20px;
       }
 
+      .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
       .progress-bar-container {
         background: #e0e0e0;
         border-radius: 20px;
@@ -55,11 +62,8 @@
   <body>
     <h1>Balancer</h1>
     <div class="container">
-      <div class="item">
+      <div class="flex-container">
         <p id="date">日期：加载中...</p>
-      </div>
-      <!-- 新增今日余额显示 -->
-      <div class="item">
         <p>今日余额：<span id="today-balance">加载中...</span>元</p>
       </div>
       <div class="item">
