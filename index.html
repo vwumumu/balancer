@@ -58,6 +58,10 @@
       <div class="item">
         <p id="date">日期：加载中...</p>
       </div>
+      <!-- 新增今日余额显示 -->
+      <div class="item">
+        <p>今日余额：<span id="today-balance">加载中...</span>元</p>
+      </div>
       <div class="item">
         <p>剩余天数 (<span id="remaining-days">加载中...</span>天)</p>
         <div class="progress-bar-container">
@@ -102,6 +106,9 @@
           .toString()
           .padStart(2, "0")}`;
         document.getElementById("date").textContent = `日期：${currentDate}`;
+
+        // 显示今日余额
+        document.getElementById("today-balance").textContent = data.balance;
 
         // 计算本月剩余天数
         const totalDays = new Date(year, month, 0).getDate();
