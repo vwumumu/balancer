@@ -1,2 +1,7 @@
 get_balance.py
 main
+bin
+include
+lib
+lib64
+pyvenv.cfg
